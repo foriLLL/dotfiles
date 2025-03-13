@@ -1,0 +1,6 @@
+set number
+set relativenumber
+set autoindent
+set mouse=a
+colorscheme desert
+syntax enable
