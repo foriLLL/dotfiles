@@ -104,6 +104,14 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+###### 使用 chezmoi 模板来定义 homebrew（homebrew 在不同系统上安装位置不同，利用详见官方文档）
+{{ if eq .chezmoi.os "linux" }}
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+{{ else if eq .chezmoi.os "darwin"}}
+# MacOS 不用额外加入环境变量，已经在/opt/homebrew/bin/brew
+{{ end }}
+###### 使用 chezmoi 模板来定义 homebrew（homebrew 在不同系统上安装位置不同，利用详见官方文档）
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
