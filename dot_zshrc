@@ -77,6 +77,8 @@ ZSH_THEME="powerlevel10k/powerlevel10k" # set by `omz`
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
+export ZSH_CUSTOM="$ZSH/custom"         # 明确指定，保证 chezmoi 在各系统一致
+
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
