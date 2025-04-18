@@ -189,10 +189,27 @@ eval $(thefuck --alias fuck)
 # alias fuck='eval $(thefuck --alias); fuck'  # 首次执行时加载
 
 
-# homebrew
+# 基于主机名的 homebrew 配置
+{{/* --- Homebrew 镜像配置 --- */}}
+{{/* 在下方定义位于境外的机器的主机名 */}}
+{{/* 请将这些占位符替换为你的实际主机名 */}}
+{{- $foreignHostnames := list "ccforil" "tmpname" -}}
+
+{{/* 检查当前机器的主机名是否在境外列表中 */}}
+{{ if has .chezmoi.hostname $foreignHostnames -}}
+# 主机名 ({{ .chezmoi.hostname }}) 不在中国列表中。使用默认 Homebrew 镜像域。
+# 无需设置特定的 HOMEBREW_BOTTLE_DOMAIN，或者如果之前设置过可以显式取消设置：
+unset HOMEBREW_BOTTLE_DOMAIN
+{{ else -}}
+# 主机名 ({{ .chezmoi.hostname }}) 被识别为位于中国。设置阿里云镜像。
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles
-export HOMEBREW_NO_AUTO_UPDATE=1  # 防止每次下载自动更新
-# homebrew end
+{{ end -}}
+
+# 此设置禁用每次执行 brew 命令时的自动更新。
+export HOMEBREW_NO_AUTO_UPDATE=1
+
+{{/* --- Homebrew 镜像配置结束 --- */}}
+# homebrew 结束 
 
 # pnpm
 export PNPM_HOME="/Users/foril/Library/pnpm"
